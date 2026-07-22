@@ -1,0 +1,50 @@
+# Entorno y configuracion
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Archivos de datos que no queremos subir a git
+*.csv
+*.xlsx
+*.xls
+*.json
+*.pdf
+ 
+# Archivos de Tableau que no queremos subir a git
+*.twb
+*.twbx
+*.tfl
+ 
+# Archivos y entornos generados por Python que queremos evitar en git
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.env
+.ipynb_checkpoints/
+ 
+# Archivos y entornos generados por R
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+.Rproj.user/
+
+ 
+# Docker output directory
+output/
