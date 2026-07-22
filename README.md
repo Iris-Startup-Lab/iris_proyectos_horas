@@ -11,7 +11,7 @@ El siguiente diagrama muestra la estructura del pipeline de Proyectos y activida
 
 ![Pipeline](./imagenes/Pipeline.png)
 
-- **Extracción**: Trello API (Board de proyectos y actividades) + lectura de Excel, el archivo Actividades IRIS 2026.xls se descarga de OneDrive de la ruta [Archivo Actividades](onuris-my.sharepoint.com/:f:/r/personal/196938_onuriscp_com/Documents/IRIS%20StartUp%20Lab/Direcci%C3%B3n/5.2026/04.%20Actividades%20IRIS?csf=1&web=1&e=JBjNg3) y se coloca manualmente en la carpeta del proyecto pipeline_horas_iris>data
+- **Extracción**: Trello API (Board de proyectos y actividades) + lectura de Excel, el archivo Actividades IRIS 2026.xls se descarga de OneDrive de la ruta [Archivo Actividades](https://onuris-my.sharepoint.com/:f:/r/personal/196938_onuriscp_com/Documents/IRIS%20StartUp%20Lab/Direcci%C3%B3n/5.2026/04.%20Actividades%20IRIS?csf=1&web=1&e=JBjNg3) y se coloca manualmente en la carpeta del proyecto pipeline_horas_iris>data
 - **Normalización**: Limpieza de nombres, acrónimos, formato de fechas, consolidación de duplicados
 - **Carga**: Upserts hacia Supabase (PostgreSQL)
 - **Dashboard**: Tableau conectado a Supabase (esquema actividades_iris)
