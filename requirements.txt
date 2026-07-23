@@ -1,3 +1,4 @@
+### Falta versionar para más estabilidad
 pandas
 numpy
 matplotlib

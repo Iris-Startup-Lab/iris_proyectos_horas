@@ -48,3 +48,8 @@ env/
  
 # Docker output directory
 output/
+
+# Carpetas test 
+*test/
+*tests/
+data/

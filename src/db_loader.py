@@ -407,14 +407,37 @@ def insert_avance_tareas(conn, df, proyecto_map, colaborador_map):
         return 0
     return len(rows)
 
-def cargar_pipeline(df_unificado, df_proyectos, full_reload=False):
+def delete_window_tables(conn, window_start):
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                DELETE FROM actividades_iris.avance_tareas
+                WHERE fecha_ultima_modificacion >= %s
+                   OR fecha_inicio_tarea >= %s
+                   OR fecha_fin_tarea >= %s;
+            """, (window_start, window_start, window_start))
+            cur.execute("""
+                DELETE FROM actividades_iris.avance_proyectos
+                WHERE fecha_ultima_modificacion >= %s
+                   OR fecha_insercion >= %s;
+            """, (window_start, window_start))
+        conn.commit()
+        print(f"   Borrado por ventana temporal a partir de {window_start} realizado.")
+    except Exception as e:
+        print(f"   Error durante el borrado por ventana temporal: {e}")
+        conn.rollback()
+
+def cargar_pipeline(df_unificado, df_proyectos, full_reload=False, window_start=None):
     conn = get_connection()
     try:
         if full_reload:
             print("   Full reload: truncando tablas...")
             truncate_tables(conn)
+        elif window_start is not None:
+            print(f"   Recarga por ventana temporal: eliminando registros a partir de {window_start}...")
+            delete_window_tables(conn, window_start)
         else:
-            print("   Incremental: sin truncado")
+            print("   Incremental: sin truncado ni borrado de ventana")
         from src.pipeline_actividades_trello import get_board_members
         board_id_actividades = os.getenv("TRELLO_BOARD_IDS", "").split(",")[0].strip()
         member_map, member_usernames = get_board_members(board_id_actividades)
